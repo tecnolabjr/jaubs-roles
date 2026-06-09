@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="ISO-8859-1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jaubs.css">
+        <script src="/js/bootstrap.min.js"></script>
+        <title>Just Another Used Bookstore</title>
+    </head>
+
+    <body>
+        <div class='container-fluid'>
+
+            <!-- Insert common header for all pages -->
+            <div th:insert="fragments/header :: header"/>
+
+            <div class="row ms-1 mt-4">
+
+                <!-- Show some of the User Information -->
+                <div class="col-lg-5">
+
+                    <form th:action="@{/jaubs/ui/admin/delete-item}" method="post" th:object="${item}">
+
+                        Do you want to delete the following book item?
+                        <p></p>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="fw-bold">Book Title</td>
+                                <td><label th:text="${item.name}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Book Author</td>
+                                <td><label th:text="${item.author}"/></td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Book Price($)</td>
+                                <td><label th:text="${item.price}"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <input type="hidden" th:field="*{id}">
+                        <button class="btn btn-primary" type="submit">Delete</button>
+                        <a th:href="@{/jaubs/ui/show-items}" class="btn btn-primary" role="button">Cancel</a>
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </body>
+</html>

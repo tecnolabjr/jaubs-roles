@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="ISO-8859-1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jaubs.css">
+        <script src="/js/bootstrap.min.js"></script>
+        <title>Just Another Used Bookstore</title>
+    </head>
+
+    <body>
+        <!-- The header with project name and logout link -->
+        <div class="row jaubs-header" th:fragment="header">
+            <div class="col">
+                <h2>
+                    JAUBS - Just Another Used Bookstore
+                </h2>
+            </div>
+
+            <div class="col d-flex flex-row-reverse bd-highlight">
+                <div class="p-2 bd-highlight">
+                    <a href="/logout" style="color:white">Sign out</a>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <img th:src="${user.picture == null} ? '/images/person.svg' : ${user.picture}"
+                         class="img-circle" width="35" height="35">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

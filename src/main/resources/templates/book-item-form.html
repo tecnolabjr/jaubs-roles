@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="ISO-8859-1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/jaubs.css">
+        <title>Just Another Used Bookstore</title>
+    </head>
+
+    <body>
+
+        <div class='container-fluid'>
+
+            <!-- Insert common header for all pages -->
+            <div th:insert="fragments/header :: header"/>
+
+            <div class="row mt-3">
+                <div class="col-lg-6">
+                    <form th:action="@{/jaubs/ui/admin/save-item}" method="post" th:object="${item}">
+
+                        <div class="row">
+                            <span class="h2 m-3"
+                                  th:text="${item.id == null} ? 'Create Book Item' : 'Edit Book Item ' + ${item.id}">
+                            </span>
+                        </div>
+
+                        <div class="row form-group m-3">
+                            <label for="booktitle"><b>Book Name</b></label>
+                            <input type="text" required
+                                   class="form-control"
+                                   th:field="*{name}"
+                                   id="booktitle"
+                                   placeholder="Enter Title of the Book">
+                        </div>
+
+                        <div class="row form-group m-3">
+                            <label for="author"><b>Book Author</b></label>
+                            <input type="text" required
+                                   class="form-control"
+                                   th:field="*{author}"
+                                   id="author"
+                                   placeholder="Enter Author of the Book">
+                        </div>
+
+                        <div class="row form-group m-3">
+                            <label for="price"><b>Book Price($)</b></label>
+                            <input type="number" step="0.01" required
+                                   class="form-control"
+                                   th:field="*{price}"
+                                   id="price"
+                                   placeholder="Enter Price of the Book">
+                        </div>
+
+                        <div class="row form-group m-3">
+                            <label for="condition"><b>Book Condition</b></label>
+                            <select required class="form-control" id="condition" th:field="*{condition}" >
+                                <option value="FAIR">Fair</option>
+                                <option value="GOOD">Good</option>
+                                <option value="ASNEW">Like New</option>
+                            </select>
+                        </div>
+
+                        <div class="row form-group m-3">
+                            <label for="notes"><b>Notes</b></label>
+                            <textarea  required rows="5"
+                                       class="form-control"
+                                       th:field="*{notes}"
+                                       id="notes"
+                                       placeholder="Enter Notes for this Book Item">
+                            </textarea>
+                        </div>
+
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{sold}">
+                        <input type="hidden" th:field="*{creator}">
+                        <button class="btn btn-primary ms-3" type="submit">Save</button>
+                        <a th:href="@{/jaubs/ui/show-items}" class="btn btn-primary" role="button">Cancel</a>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
